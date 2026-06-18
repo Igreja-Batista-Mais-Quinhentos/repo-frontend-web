@@ -62,6 +62,16 @@ export interface Evento {
   total_confirmacoes: number
 }
 
+export interface Interessado {
+  id: number
+  nome: string
+  email: string
+  telefone?: string
+  frequenta?: string
+  mensagem?: string
+  criado_em: string
+}
+
 export interface Grupo {
   id: number
   nome: string
