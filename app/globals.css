@@ -1,26 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paleta Mais 500 */
+  --azul-profundo: #0B5CAC;
+  --azul-ceu: #4183C5;
+  --rosa-profundo: #FB62A2;
+  --rosa-por-do-sol: #FAAACB;
+  --off-white: #FFFBE5;
+  --ardosia: #4F5861;
+  --cinza-escuro: #1D2023;
+
+  --background: var(--off-white);
+  --foreground: var(--cinza-escuro);
+  --sidebar-bg: var(--cinza-escuro);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-azul-profundo: #0B5CAC;
+  --color-azul-ceu: #4183C5;
+  --color-rosa-profundo: #FB62A2;
+  --color-rosa-por-do-sol: #FAAACB;
+  --color-off-white: #FFFBE5;
+  --color-ardosia: #4F5861;
+  --color-cinza-escuro: #1D2023;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
+
+/* Gradiente assinatura da marca */
+.gradient-brand {
+  background: linear-gradient(90deg, #FB62A2 0%, #FAAACB 40%, #4183C5 70%, #0B5CAC 100%);
+}
+
+.gradient-brand-bg {
+  background: linear-gradient(135deg, #0B5CAC 0%, #4183C5 40%, #FAAACB 70%, #FB62A2 100%);
+}
+
+/* Linha decorativa assinatura */
+.brand-line {
+  height: 2px;
+  background: linear-gradient(90deg, #FB62A2 0%, #FAAACB 40%, #4183C5 70%, #0B5CAC 100%);
+  border: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1D2023; }
+::-webkit-scrollbar-thumb { background: #4F5861; border-radius: 3px; }
