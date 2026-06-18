@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import api from '@/lib/api'
 
 export default function LoginPage() {
@@ -10,7 +11,7 @@ export default function LoginPage() {
   const [erro, setErro] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: { preventDefault(): void }) {
     e.preventDefault()
     setErro('')
     setLoading(true)
@@ -27,72 +28,174 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex" style={{ background: '#1D2023' }}>
-      {/* Lado esquerdo — identidade */}
-      <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-center p-12 relative overflow-hidden">
-        <div className="gradient-brand-bg absolute inset-0 opacity-20" />
-        <div className="relative z-10 text-center">
-          <p className="text-xs tracking-widest text-white/40 uppercase mb-2">Igreja Batista</p>
-          <h1 className="text-7xl font-bold text-white mb-4">†500</h1>
-          <div className="brand-line w-48 mx-auto rounded-full mb-6" />
-          <p className="text-white/60 text-sm max-w-xs leading-relaxed">
-            Eram águas em que se podia nadar, um rio pelo qual <strong className="text-white">não se podia passar andando.</strong>
-          </p>
-          <p className="text-white/30 text-xs mt-3 tracking-widest">EZEQUIEL 47:5</p>
+
+      {/* ── LADO ESQUERDO — identidade visual ── */}
+      <div className="hidden lg:flex lg:w-[55%] relative overflow-hidden">
+
+        {/* Textura oficial da marca (Colorswaves) */}
+        <Image
+          src="/colorswaves.png"
+          alt=""
+          fill
+          className="object-cover object-center"
+          priority
+        />
+
+        {/* Overlay escuro para contraste */}
+        <div className="absolute inset-0" style={{ background: 'rgba(29,32,35,0.45)' }} />
+
+        {/* Gradiente extra nas bordas */}
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(to right, transparent 60%, #1D2023 100%)',
+        }} />
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(to top, #1D2023 0%, transparent 40%)',
+        }} />
+
+        {/* Conteúdo sobre a textura */}
+        <div className="relative z-10 flex flex-col justify-between w-full p-14">
+
+          {/* Logo real da identidade visual */}
+          <div>
+            <Image
+              src="/logo-light.png"
+              alt="Igreja Batista +500"
+              width={320}
+              height={160}
+              className="object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+          </div>
+
+          {/* Verso no rodapé */}
+          <div>
+            <div className="w-16 h-px mb-5" style={{
+              background: 'linear-gradient(90deg, #FB62A2, #0B5CAC)',
+            }} />
+            <p className="text-white/70 text-base leading-relaxed max-w-sm">
+              Eram águas em que se podia nadar, um rio pelo qual{' '}
+              <span className="text-white font-semibold">não se podia passar andando.</span>
+            </p>
+            <p className="text-white/30 text-xs mt-3 tracking-[0.3em] uppercase">
+              Ezequiel 47:5
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Lado direito — formulário */}
-      <div className="flex-1 flex flex-col justify-center items-center p-8">
-        <div className="w-full max-w-sm">
-          <div className="mb-8 lg:hidden text-center">
-            <p className="text-xs tracking-widest text-white/40 uppercase mb-1">Igreja Batista</p>
-            <h1 className="text-4xl font-bold text-white">†500</h1>
-            <div className="brand-line w-24 mx-auto rounded-full mt-3" />
+      {/* ── LADO DIREITO — formulário ── */}
+      <div className="flex-1 flex flex-col justify-center items-center px-8 py-12 relative">
+
+        {/* Brilho rosa sutil no canto superior */}
+        <div className="absolute top-0 right-0 w-64 h-64 rounded-full pointer-events-none" style={{
+          background: 'radial-gradient(circle, rgba(251,98,162,0.12) 0%, transparent 70%)',
+        }} />
+        {/* Brilho azul sutil no canto inferior */}
+        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none" style={{
+          background: 'radial-gradient(circle, rgba(11,92,172,0.15) 0%, transparent 70%)',
+        }} />
+
+        <div className="w-full max-w-[360px] relative z-10">
+
+          {/* Logo mobile */}
+          <div className="lg:hidden mb-10 flex flex-col items-center">
+            <Image
+              src="/logo-light.png"
+              alt="Igreja Batista +500"
+              width={200}
+              height={100}
+              className="object-contain"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+            <div className="w-12 h-px mt-5" style={{
+              background: 'linear-gradient(90deg, #FB62A2, #0B5CAC)',
+            }} />
           </div>
 
-          <h2 className="text-xl font-semibold text-white mb-1">Bem-vindo de volta</h2>
-          <p className="text-white/40 text-sm mb-8">Entre com sua conta para continuar</p>
+          {/* Isotipo + título */}
+          <div className="mb-8">
+            <Image
+              src="/isotipo-light.png"
+              alt=""
+              width={36}
+              height={36}
+              className="mb-5 opacity-60"
+              style={{ filter: 'brightness(0) invert(1)' }}
+            />
+            <h2 className="text-2xl font-bold text-white mb-1">
+              Bem-vindo de volta
+            </h2>
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              Entre com sua conta para continuar
+            </p>
+          </div>
 
+          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+
             <div>
-              <label className="block text-xs text-white/50 mb-1.5 tracking-wide uppercase">E-mail</label>
+              <label className="block text-xs tracking-widest uppercase mb-2"
+                style={{ color: 'rgba(255,255,255,0.4)' }}>
+                E-mail
+              </label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-white/20 border border-white/10 focus:outline-none focus:border-[#4183C5] transition-colors"
-                style={{ background: '#2a2f33' }}
                 placeholder="pastor@mais500.com"
+                className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 outline-none transition-all"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+                onFocus={e => e.currentTarget.style.borderColor = '#FB62A2'}
+                onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'}
               />
             </div>
 
             <div>
-              <label className="block text-xs text-white/50 mb-1.5 tracking-wide uppercase">Senha</label>
+              <label className="block text-xs tracking-widest uppercase mb-2"
+                style={{ color: 'rgba(255,255,255,0.4)' }}>
+                Senha
+              </label>
               <input
                 type="password"
                 value={senha}
                 onChange={e => setSenha(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-white/20 border border-white/10 focus:outline-none focus:border-[#4183C5] transition-colors"
-                style={{ background: '#2a2f33' }}
                 placeholder="••••••••"
+                className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 outline-none transition-all"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                }}
+                onFocus={e => e.currentTarget.style.borderColor = '#FB62A2'}
+                onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'}
               />
             </div>
 
             {erro && (
-              <p className="text-sm text-[#FB62A2]">{erro}</p>
+              <p className="text-sm font-medium" style={{ color: '#FB62A2' }}>{erro}</p>
             )}
 
+            {/* Botão com gradiente da marca */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-lg text-sm font-semibold text-white transition-opacity disabled:opacity-50"
-              style={{ background: '#0B5CAC' }}
+              className="w-full py-3.5 rounded-xl text-sm font-bold text-white mt-2 transition-opacity disabled:opacity-50 hover:opacity-90"
+              style={{
+                background: 'linear-gradient(90deg, #FB62A2 0%, #FAAACB 40%, #4183C5 75%, #0B5CAC 100%)',
+              }}
             >
               {loading ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
+
+          {/* Rodapé */}
+          <p className="text-center text-xs mt-8" style={{ color: 'rgba(255,255,255,0.2)' }}>
+            Igreja Batista +500 · Plataforma interna
+          </p>
         </div>
       </div>
     </div>

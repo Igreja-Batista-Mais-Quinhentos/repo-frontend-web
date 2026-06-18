@@ -23,12 +23,12 @@ export interface Membro {
 
 export interface LancamentoFinanceiro {
   id: number
-  tipo: 'DIZIMO' | 'DOACAO' | 'DESPESA'
+  tipo: 'DIZIMO' | 'OFERTA' | 'DOACAO' | 'DESPESA' | 'OUTROS'
   valor: string
   data: string
   descricao?: string
   membro_id?: number
-  categoria_id: number
+  categoria_id?: number
   criado_em: string
 }
 
