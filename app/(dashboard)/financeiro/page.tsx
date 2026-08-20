@@ -27,7 +27,6 @@ export default function FinanceiroPage() {
   const [form, setForm] = useState({ tipo: 'DIZIMO', valor: '', data: '', descricao: '' })
 
   function recarregar(m: number, a: number) {
-    setLoading(true)
     Promise.all([
       api.get('/financeiro/resumo', { params: { mes: m, ano: a } }),
       api.get('/financeiro/lancamentos', { params: { mes: m, ano: a } }),
@@ -35,7 +34,10 @@ export default function FinanceiroPage() {
      .finally(() => setLoading(false))
   }
 
-  useEffect(() => { recarregar(mes, ano) }, [mes, ano])
+  useEffect(() => {
+    queueMicrotask(() => setLoading(true))
+    recarregar(mes, ano)
+  }, [mes, ano])
 
   async function salvar(e: { preventDefault(): void }) {
     e.preventDefault(); setSalvando(true); setErro('')

@@ -149,7 +149,7 @@ export default function MembrosPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {interessados.map((p, i) => (
+            {interessados.map((p) => (
               <div key={p.id} className="rounded-2xl p-5 relative overflow-hidden"
                 style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
                 <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg,rgba(251,98,162,0.5),transparent)' }} />
