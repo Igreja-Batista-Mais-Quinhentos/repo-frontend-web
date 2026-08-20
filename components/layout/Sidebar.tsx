@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Users, DollarSign, Bell, Home, LogOut, ChevronRight, Church } from 'lucide-react'
+import { Users, DollarSign, Bell, Home, LogOut, ChevronRight, Church, Newspaper, HandCoins } from 'lucide-react'
 
 const nav = [
   { href: '/dashboard',   label: 'Início',       icon: Home },
@@ -10,6 +10,8 @@ const nav = [
   { href: '/financeiro',  label: 'Financeiro',   icon: DollarSign },
   { href: '/comunicacao', label: 'Comunicação',  icon: Bell },
   { href: '/grupos',      label: 'Grupos',       icon: Church },
+  { href: '/conteudo',    label: 'Conteúdo',     icon: Newspaper },
+  { href: '/doacao',      label: 'Doação',       icon: HandCoins },
 ]
 
 export default function Sidebar() {

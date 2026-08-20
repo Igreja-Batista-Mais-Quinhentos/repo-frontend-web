@@ -80,3 +80,40 @@ export interface Grupo {
   criado_em: string
   total_membros: number
 }
+
+export interface Ministerio {
+  id: number
+  nome: string
+  tag: string
+  descricao: string
+  lider?: string
+  quando?: string
+  foto_url?: string
+  ativo: boolean
+  criado_em: string
+}
+
+export interface Noticia {
+  id: number
+  categoria: string
+  titulo: string
+  resumo?: string
+  corpo: string
+  foto_url?: string
+  ativo: boolean
+  publicado_em: string
+  autor_id: number
+}
+
+export interface FundoDoacao {
+  id: number
+  key: string
+  nome: string
+  descricao?: string
+  ativo: boolean
+}
+
+export interface ConfiguracaoDoacao {
+  pix_key?: string
+  dados_bancarios?: string
+}
